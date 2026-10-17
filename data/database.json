@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": "host-nafiul-001",
+      "username": "Nafiul",
+      "role": "HOST",
+      "salt": "9b72d4767579ab6a6997d50fbfaf8f79",
+      "hash": "de0942e577ebba844b0d37b82106ec01e8e4d8832f9ba2c2b3b1364cc42adb074f80eef5fb53984bbf8c8cb8f9ec3fb9d105fe9e02d7a9e340d76893e708d216",
+      "createdAt": 1792185637965
+    },
+    {
+      "id": "user-player1-mvbh20ld",
+      "username": "Player1",
+      "role": "PLAYER",
+      "salt": "4c62128fd471f3b1159828572fc0c057",
+      "hash": "7b17dd6c998dca6e12944b64b2397be08a1eb630e95a8a86b720976a816e810a92455eaa1b4ae174ce97784b9a42c1801bdec32830cacc5c6af0e9300d35ac93",
+      "createdAt": 1792185638017
+    },
+    {
+      "id": "user-player2-mvbh20ml",
+      "username": "Player2",
+      "role": "PLAYER",
+      "salt": "1991d2dd478b73acab2e2a6ee88148f1",
+      "hash": "53d524532ca9db519a630cbbc59786057f583c8ef1217277edd501a772d61799ff05e6c2fa3638892f13241f2f013e2d977c3227d300e6b34a6b231c229530fc",
+      "createdAt": 1792185638061
+    },
+    {
+      "id": "user-player3-mvbh20nu",
+      "username": "Player3",
+      "role": "PLAYER",
+      "salt": "ed86164964bf0105b5320a0aaffb342c",
+      "hash": "5882105de4427c40c3c94fb22e0834d3fd4fcb0f472c640166f594e45b07320b322d983d7d25b11a129d5f277309e6ec29d2d7548a9b8676977925b12d590f6f",
+      "createdAt": 1792185638106
+    },
+    {
+      "id": "user-player4-mvbh20p2",
+      "username": "Player4",
+      "role": "PLAYER",
+      "salt": "03d3795db3354017b20d063c180c8af7",
+      "hash": "07b1a1507f177fcb7884431ff5937a9bed3bbe45f3c92c005131893f862098a14e643d8a09c7f899879b468b448b24ab2f5c21d074b4e83ddc0c19c16a522379",
+      "createdAt": 1792185638150
+    },
+    {
+      "id": "user-mvbh2k29-c1a887",
+      "username": "Agent007",
+      "role": "PLAYER",
+      "salt": "32ff309833aa210f59027c4e0014df6c",
+      "hash": "512070751757aaf24b4a5bb434b07a4542dbf3601403efd0e6f41f3c4972f389057b6597f07f29e70991efdc488bb66b67d619e4795ad4bc230fb10ff1437e56",
+      "createdAt": 1792185663249
+    }
+  ],
+  "globalChat": [
+    {
+      "id": "welcome-msg-1",
+      "roomId": "global",
+      "senderId": "host-nafiul-001",
+      "senderUsername": "Nafiul",
+      "content": "Welcome to SPY GAME! Join a room or wait for a match to start.",
+      "timestamp": 1792182038150
+    }
+  ],
+  "roomHistory": []
+}
