@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, LogIn, AlertCircle, Key } from 'lucide-react';
+import { X, LogIn, AlertCircle, Key, Gamepad2, Sparkles } from 'lucide-react';
 import { useGame } from '../context/GameContext.js';
 
 interface JoinRoomModalProps {
@@ -42,34 +42,34 @@ export function JoinRoomModal({ isOpen, onClose }: JoinRoomModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-fade-in transition-colors duration-300">
-      <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-pop-in transition-colors duration-300">
+      <div className="w-full max-w-md bg-white dark:bg-[#151B33] border-3 border-indigo-200 dark:border-indigo-900/80 rounded-3xl shadow-2xl overflow-hidden transition-colors duration-300">
         {/* Header */}
-        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
-            <Key className="w-4 h-4 text-red-500" />
-            <span>JOIN ROOM</span>
+        <div className="px-6 py-4 bg-indigo-50/70 dark:bg-[#10152B] border-b-2 border-indigo-100 dark:border-indigo-950 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm font-game font-black text-rose-600 dark:text-rose-400 uppercase tracking-wider">
+            <Gamepad2 className="w-4 h-4 text-rose-500" />
+            <span>JOIN PARTY ROOM</span>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5 stroke-[2.5]" />
           </button>
         </div>
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {error && (
-            <div className="flex items-start gap-2.5 p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/80 rounded-xl text-red-700 dark:text-red-200 text-xs">
-              <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2.5 p-3.5 bg-rose-50 dark:bg-rose-950/60 border-2 border-rose-200 dark:border-rose-800 rounded-2xl text-rose-700 dark:text-rose-200 text-xs font-medium animate-shake">
+              <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
-              Enter 5-Character Room Code
+            <label className="block text-xs font-game font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+              Enter 5-Character Passcode
             </label>
             <input
               type="text"
@@ -78,10 +78,10 @@ export function JoinRoomModal({ isOpen, onClose }: JoinRoomModalProps) {
               placeholder="e.g. SPY01"
               maxLength={5}
               autoFocus
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl text-center font-mono text-2xl font-bold tracking-[0.25em] text-emerald-600 dark:text-emerald-400 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none focus:border-red-500 transition-colors uppercase"
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-[#0E1326] border-2 border-slate-200 dark:border-indigo-950 rounded-2xl text-center font-mono text-3xl font-black tracking-[0.25em] text-cyan-600 dark:text-cyan-400 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none focus:border-cyan-400 transition-colors uppercase shadow-inner"
             />
-            <p className="mt-1.5 text-[11px] text-slate-500 text-center">
-              Ask Host Nafiul for the 5-character mission code.
+            <p className="mt-2 text-xs font-medium text-slate-500 text-center">
+              Ask your host for the 5-character room code.
             </p>
           </div>
 
@@ -89,16 +89,16 @@ export function JoinRoomModal({ isOpen, onClose }: JoinRoomModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-3 px-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs tracking-wider rounded-xl transition-colors cursor-pointer"
+              className="flex-1 py-3 px-4 btn-game-slate font-game font-bold text-xs tracking-wider rounded-2xl cursor-pointer"
             >
               CANCEL
             </button>
             <button
               type="submit"
               disabled={roomCode.length !== 5 || isJoining}
-              className="flex-1 py-3 px-4 bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white font-bold text-xs tracking-wider rounded-xl shadow-md dark:shadow-red-950/40 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 py-3 px-4 btn-game-coral font-game font-black text-xs tracking-wider rounded-2xl shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
             >
-              <LogIn className="w-4 h-4" />
+              <LogIn className="w-4 h-4 stroke-[2.5]" />
               <span>{isJoining ? 'JOINING...' : 'JOIN ROOM'}</span>
             </button>
           </div>

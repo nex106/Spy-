@@ -8,6 +8,10 @@ import {
   Users,
   MessageSquare,
   Sparkles,
+  Crown,
+  Gamepad2,
+  Flame,
+  Radio,
 } from 'lucide-react';
 import { useGame } from '../context/GameContext.js';
 
@@ -58,24 +62,44 @@ export function GlobalChatHome({
     user?.username.toLowerCase() === 'admin' ||
     user?.username.toLowerCase() === 'nafiul';
 
+  const avatarColors = [
+    'bg-rose-500 text-white',
+    'bg-amber-400 text-slate-900',
+    'bg-cyan-400 text-slate-900',
+    'bg-violet-500 text-white',
+    'bg-emerald-400 text-slate-900',
+    'bg-fuchsia-500 text-white',
+  ];
+
+  const getAvatarColor = (name: string) => {
+    const idx =
+      name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % avatarColors.length;
+    return avatarColors[idx];
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 sm:py-8 flex flex-col gap-6 min-h-[calc(100vh-4rem)]">
-      {/* Top Banner / Actions Area */}
-      <div className="text-center flex flex-col items-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight uppercase bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-rose-500 to-amber-500">
+      {/* Cartoon Party Game Hero / Lobby Banner */}
+      <div className="text-center flex flex-col items-center animate-pop-in">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-white/90 dark:bg-[#161B33] border-2 border-indigo-200 dark:border-indigo-800/80 rounded-full text-xs font-game font-bold text-indigo-600 dark:text-indigo-300 mb-2 shadow-xs">
+          <Gamepad2 className="w-3.5 h-3.5 text-cyan-500" />
+          <span>Party Game Lobby</span>
+        </div>
+
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-game tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-amber-400 to-cyan-400 drop-shadow-xs">
           SPY GAME
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md">
-          Global Operations Command & Matchmaking Lobby
+        <p className="mt-1 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 max-w-md">
+          Join a party room, blend in with your crew, and sniff out the secret spy!
         </p>
 
-        {/* Action Buttons */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3 w-full max-w-xl">
+        {/* 3D Tactile Action Buttons */}
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 w-full max-w-xl">
           <button
             onClick={onOpenJoinModal}
-            className="flex-1 min-w-[160px] py-3.5 px-6 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-sm tracking-wider rounded-xl shadow-md dark:shadow-lg dark:shadow-red-950/40 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+            className="flex-1 min-w-[160px] py-3.5 px-6 btn-game-coral font-game font-black text-sm tracking-wider rounded-2xl shadow-md flex items-center justify-center gap-2 cursor-pointer"
           >
-            <LogIn className="w-4 h-4" />
+            <LogIn className="w-4 h-4 stroke-[2.5]" />
             <span>JOIN ROOM</span>
           </button>
 
@@ -83,59 +107,66 @@ export function GlobalChatHome({
             <>
               <button
                 onClick={onOpenCreateModal}
-                className="flex-1 min-w-[160px] py-3.5 px-6 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-amber-600 dark:text-amber-400 border border-amber-300 dark:border-amber-800/60 font-bold text-sm tracking-wider rounded-xl shadow-sm dark:shadow-lg dark:shadow-amber-950/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+                className="flex-1 min-w-[160px] py-3.5 px-6 btn-game-amber font-game font-black text-sm tracking-wider rounded-2xl shadow-md flex items-center justify-center gap-2 cursor-pointer"
               >
-                <PlusCircle className="w-4 h-4 text-amber-500" />
+                <PlusCircle className="w-4 h-4 stroke-[2.5]" />
                 <span>CREATE ROOM</span>
               </button>
 
               <button
                 onClick={onOpenHostDashboard}
-                className="w-full sm:w-auto py-3 px-5 bg-white dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-700/70 font-semibold text-xs tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
+                className="w-full sm:w-auto py-3 px-5 btn-game-purple font-game font-black text-xs tracking-wider rounded-2xl shadow-md flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Shield className="w-3.5 h-3.5 text-amber-500" />
-                <span>HOST / ADMIN DASHBOARD</span>
+                <Crown className="w-3.5 h-3.5 fill-current" />
+                <span>HOST & ADMIN PANEL</span>
               </button>
             </>
           )}
         </div>
       </div>
 
-      {/* Live Chat Area */}
-      <div className="flex-1 flex flex-col bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden backdrop-blur-md shadow-lg dark:shadow-2xl transition-colors duration-300">
+      {/* Live Global Chat Box */}
+      <div className="flex-1 flex flex-col bg-white dark:bg-[#151B33] border-2 border-indigo-100 dark:border-indigo-900/60 rounded-3xl overflow-hidden shadow-[0_12px_24px_rgba(15,23,42,0.06)] dark:shadow-[0_16px_32px_rgba(0,0,0,0.35)] transition-colors duration-300">
         {/* Chat Header */}
-        <div className="px-5 py-3.5 bg-slate-50 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200">
-            <MessageSquare className="w-4 h-4 text-red-500" />
-            <span>GLOBAL LIVE FREQUENCY</span>
+        <div className="px-5 py-3.5 bg-slate-50 dark:bg-[#10152B] border-b-2 border-indigo-100 dark:border-indigo-950 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-lg bg-rose-500/10 dark:bg-rose-500/20 text-rose-500 flex items-center justify-center">
+              <MessageSquare className="w-3.5 h-3.5" />
+            </div>
+            <span className="font-game font-black text-xs sm:text-sm tracking-wide uppercase text-slate-800 dark:text-slate-100">
+              LOBBY CHAT
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
-              <span>All Logged-in Players</span>
+            <div className="flex items-center gap-1.5 text-[11px] font-game font-bold text-slate-500 dark:text-slate-400">
+              <span>All Players</span>
               <span aria-hidden="true">·</span>
-              <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">LIVE</span>
+              <span className="text-emerald-500 dark:text-emerald-400 flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                LIVE
+              </span>
             </div>
 
             {/* Host Clear Chat Button */}
             {isHost &&
               (showClearConfirm ? (
-                <div className="flex items-center gap-1.5 animate-fade-in bg-red-100 dark:bg-red-950/80 px-2 py-1 rounded-lg border border-red-300 dark:border-red-800">
-                  <span className="text-[11px] font-bold text-red-800 dark:text-red-200">
+                <div className="flex items-center gap-1.5 bg-rose-100 dark:bg-rose-950/80 px-2.5 py-1 rounded-xl border border-rose-300 dark:border-rose-800">
+                  <span className="text-[11px] font-bold text-rose-800 dark:text-rose-200">
                     Wipe chat?
                   </span>
                   <button
                     type="button"
                     onClick={handleExecuteClearChat}
                     disabled={isClearing}
-                    className="px-2 py-0.5 text-[11px] font-bold bg-red-600 hover:bg-red-500 text-white rounded transition-colors cursor-pointer"
+                    className="px-2 py-0.5 text-[11px] font-game font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors cursor-pointer"
                   >
                     {isClearing ? '...' : 'YES'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setShowClearConfirm(false)}
-                    className="px-1.5 py-0.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                    className="px-1.5 py-0.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -144,11 +175,11 @@ export function GlobalChatHome({
                 <button
                   type="button"
                   onClick={() => setShowClearConfirm(true)}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-950/70 dark:hover:bg-red-900 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-800/80 transition-all cursor-pointer shadow-xs active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-game font-bold rounded-xl bg-rose-100 hover:bg-rose-200 dark:bg-rose-950/70 dark:hover:bg-rose-900 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-800/80 transition-all cursor-pointer shadow-xs active:scale-95"
                   title="Clear all chat history for everyone now"
                 >
-                  <Trash2 className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
-                  <span>CLEAR CHAT NOW</span>
+                  <Trash2 className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+                  <span>CLEAR CHAT</span>
                 </button>
               ))}
           </div>
@@ -158,61 +189,75 @@ export function GlobalChatHome({
         <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 max-h-[500px] min-h-[350px]">
           {globalChat.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-12">
-              <MessageSquare className="w-8 h-8 mb-2 opacity-40" />
-              <p className="text-xs font-medium">Chat history is empty.</p>
-              <p className="text-[11px] text-slate-400">Send a transmission to initiate communication.</p>
+              <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-[#10152B] flex items-center justify-center text-indigo-400 mb-2">
+                <MessageSquare className="w-6 h-6 opacity-60" />
+              </div>
+              <p className="text-xs font-game font-bold">Lobby chat is quiet.</p>
+              <p className="text-[11px] text-slate-400">Send a greeting to all players to kick things off!</p>
             </div>
           ) : (
             globalChat.map((msg) => {
               const isMe = msg.senderId === user?.id;
               const isSenderHost = msg.senderUsername.toLowerCase() === 'nafiul';
+              const avatarColor = getAvatarColor(msg.senderUsername);
 
               return (
                 <div
                   key={msg.id}
-                  className={`group flex flex-col ${
-                    isMe ? 'items-end' : 'items-start'
-                  } transition-opacity duration-150`}
+                  className={`group flex items-end gap-2 ${
+                    isMe ? 'flex-row-reverse' : 'flex-row'
+                  }`}
                 >
-                  {/* Sender & Timestamp Header */}
-                  <div className="flex items-center gap-2 mb-1 text-xs">
-                    <span
-                      className={`font-semibold ${
-                        isSenderHost
-                          ? 'text-amber-600 dark:text-amber-400'
-                          : isMe
-                          ? 'text-rose-600 dark:text-rose-400'
-                          : 'text-slate-700 dark:text-slate-300'
-                      }`}
-                    >
-                      {msg.senderUsername}
-                      {isSenderHost && ' (Host)'}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 tabular-nums font-mono">
-                      {formatTime(msg.timestamp)}
-                    </span>
-                    {isHost && (
-                      <button
-                        onClick={() => deleteGlobalChat(msg.id)}
-                        className="p-1 text-slate-400 hover:text-red-500 rounded hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer"
-                        title="Delete this message (Host only)"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    )}
+                  {/* Avatar Bubble */}
+                  <div
+                    className={`w-7 h-7 rounded-full shrink-0 ${avatarColor} font-game font-bold text-xs flex items-center justify-center border border-white/40 shadow-xs mb-0.5`}
+                    title={msg.senderUsername}
+                  >
+                    {msg.senderUsername.charAt(0).toUpperCase()}
                   </div>
 
-                  {/* Message Bubble */}
-                  <div
-                    className={`max-w-[85%] sm:max-w-[70%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed shadow-xs ${
-                      isMe
-                        ? 'bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/60 text-rose-900 dark:text-rose-50 rounded-tr-none'
-                        : isSenderHost
-                        ? 'bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 text-amber-900 dark:text-amber-50 rounded-tl-none'
-                        : 'bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-slate-800 dark:text-slate-100 rounded-tl-none'
-                    }`}
-                  >
-                    <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                  <div className={`flex flex-col ${isMe ? 'items-end' : 'items-start'} max-w-[85%] sm:max-w-[70%]`}>
+                    {/* Header */}
+                    <div className="flex items-center gap-1.5 mb-1 px-1 text-xs">
+                      <span
+                        className={`font-game font-bold ${
+                          isSenderHost
+                            ? 'text-amber-600 dark:text-amber-400 flex items-center gap-1'
+                            : isMe
+                            ? 'text-rose-600 dark:text-rose-400'
+                            : 'text-slate-700 dark:text-slate-300'
+                        }`}
+                      >
+                        {isSenderHost && <Crown className="w-3 h-3 fill-current inline" />}
+                        {msg.senderUsername}
+                        {isSenderHost && ' (Host)'}
+                      </span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 tabular-nums font-mono">
+                        {formatTime(msg.timestamp)}
+                      </span>
+                      {isHost && (
+                        <button
+                          onClick={() => deleteGlobalChat(msg.id)}
+                          className="p-1 text-slate-400 hover:text-rose-500 rounded hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
+                          title="Delete this message (Host only)"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Speech Bubble */}
+                    <div
+                      className={`px-4 py-2.5 rounded-3xl text-sm leading-relaxed shadow-xs ${
+                        isMe
+                          ? 'bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-br-sm'
+                          : isSenderHost
+                          ? 'bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-100 rounded-bl-sm'
+                          : 'bg-slate-100 dark:bg-[#1E2545] border border-slate-200 dark:border-indigo-900/60 text-slate-800 dark:text-slate-100 rounded-bl-sm'
+                      }`}
+                    >
+                      <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                    </div>
                   </div>
                 </div>
               );
@@ -224,21 +269,21 @@ export function GlobalChatHome({
         {/* Chat Input Form */}
         <form
           onSubmit={handleSendMessage}
-          className="p-3 sm:p-4 bg-slate-50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2"
+          className="p-3 sm:p-4 bg-slate-50 dark:bg-[#10152B] border-t-2 border-indigo-100 dark:border-indigo-950 flex items-center gap-2"
         >
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Type your transmission to all players..."
-            className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors"
+            placeholder="Type a message to everyone in the lobby..."
+            className="flex-1 px-4 py-2.5 bg-white dark:bg-[#161B33] border-2 border-slate-200 dark:border-indigo-950 rounded-2xl text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
           />
           <button
             type="submit"
             disabled={!inputText.trim()}
-            className="py-2.5 px-4 bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white rounded-xl font-semibold text-xs transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
+            className="py-2.5 px-4 btn-game-coral font-game font-black text-xs tracking-wider rounded-2xl flex items-center gap-1.5 cursor-pointer shrink-0 disabled:opacity-40"
           >
-            <Send className="w-3.5 h-3.5" />
+            <Send className="w-3.5 h-3.5 stroke-[2.5]" />
             <span className="hidden sm:inline">SEND</span>
           </button>
         </form>

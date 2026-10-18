@@ -14,7 +14,7 @@ import { RoundDiscussionView } from './components/RoundDiscussionView.js';
 import { VotingView } from './components/VotingView.js';
 import { TieResultView } from './components/TieResultView.js';
 import { WinnerResultView } from './components/WinnerResultView.js';
-import { Shield } from 'lucide-react';
+import { Gamepad2, Sparkles } from 'lucide-react';
 
 function MainApp() {
   const { user, isLoading, room } = useGame();
@@ -56,13 +56,16 @@ function MainApp() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-[#070A10] flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 gap-4 transition-colors duration-300">
-        <div className="w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-950/40 border border-red-300 dark:border-red-800/80 flex items-center justify-center animate-spin">
-          <Shield className="w-6 h-6 text-red-500" />
+      <div className="min-h-screen bg-[#EEF2FF] dark:bg-[#0C1021] flex flex-col items-center justify-center text-slate-600 dark:text-slate-300 gap-4 transition-colors duration-300">
+        <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-rose-500 via-amber-400 to-cyan-400 p-0.5 shadow-xl animate-bounce-subtle">
+          <div className="w-full h-full bg-white dark:bg-[#151B33] rounded-[22px] flex items-center justify-center text-rose-500">
+            <Gamepad2 className="w-8 h-8 animate-pulse text-rose-500" />
+          </div>
         </div>
-        <span className="font-mono text-xs tracking-widest uppercase text-slate-500 dark:text-slate-400">
-          INITIALIZING SPY NETWORK...
-        </span>
+        <div className="flex items-center gap-2 font-game font-black text-sm tracking-widest uppercase text-slate-700 dark:text-slate-200">
+          <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400 animate-spin" />
+          <span>CONNECTING TO SPY GAME LOBBY...</span>
+        </div>
       </div>
     );
   }
@@ -101,7 +104,7 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col antialiased selection:bg-red-500/30 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[#EEF2FF] dark:bg-[#0C1021] text-slate-900 dark:text-slate-100 flex flex-col antialiased selection:bg-rose-500/30 selection:text-white transition-colors duration-300">
       <Navbar onOpenHostDashboard={() => setIsHostDashboardOpen(true)} />
 
       <main className="flex-1">
