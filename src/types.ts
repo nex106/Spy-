@@ -5,6 +5,7 @@ export interface UserProfile {
   username: string;
   role: UserRole;
   createdAt: number;
+  avatar?: string;
 }
 
 export interface ChatMessage {
@@ -12,6 +13,7 @@ export interface ChatMessage {
   roomId?: string; // empty or 'global' for global chat
   senderId: string;
   senderUsername: string;
+  senderAvatar?: string;
   content: string;
   timestamp: number;
 }
@@ -21,6 +23,7 @@ export type PlayerGameRole = 'PLAYER' | 'SPY';
 export interface RoomPlayer {
   userId: string;
   username: string;
+  avatar?: string;
   isHost: boolean;
   isSecondHost?: boolean;
   isDisqualified: boolean;
@@ -48,6 +51,7 @@ export interface HintItem {
   round: number; // 1, 2, or 3
   userId: string;
   username: string;
+  userAvatar?: string;
   content: string;
   timestamp: number;
 }
@@ -65,8 +69,10 @@ export interface RoomState {
   createdAt: number;
   hostId: string;
   hostUsername: string;
+  hostAvatar?: string;
   secondHostId?: string;
   secondHostUsername?: string;
+  secondHostAvatar?: string;
   isOpenJoining: boolean;
   isClosed: boolean;
   phase: GamePhase;
@@ -103,6 +109,7 @@ export interface RoomState {
   players: {
     userId: string;
     username: string;
+    avatar?: string;
     isHost: boolean;
     isSecondHost?: boolean;
     isDisqualified: boolean;
@@ -124,7 +131,8 @@ export type WebSocketClientMessage =
   | { type: 'GLOBAL_CHAT_CLEAR' }
   | { type: 'ROOM_CHAT_SEND'; roomCode: string; content: string }
   | { type: 'SUBMIT_HINT'; roomCode: string; content: string }
-  | { type: 'CAST_VOTE'; roomCode: string; targetUserId: string };
+  | { type: 'CAST_VOTE'; roomCode: string; targetUserId: string }
+  | { type: 'HINT_TYPING'; roomCode: string; isTyping: boolean };
 
 export type WebSocketServerMessage =
   | { type: 'AUTH_SUCCESS'; user: UserProfile }
@@ -136,4 +144,17 @@ export type WebSocketServerMessage =
   | { type: 'FORCE_LOGOUT'; reason: string }
   | { type: 'ROOM_STATE'; room: RoomState }
   | { type: 'ROOM_CHAT_MESSAGE'; roomCode: string; message: ChatMessage }
-  | { type: 'ROOM_CLOSED'; roomCode: string; message: string };
+  | { type: 'ROOM_CLOSED'; roomCode: string; message: string }
+  | {
+      type: 'HINT_TYPING_UPDATE';
+      roomCode: string;
+      userId: string;
+      username: string;
+      isTyping: boolean;
+    }
+  | {
+      type: 'USER_AVATAR_UPDATE';
+      userId: string;
+      username: string;
+      avatar: string;
+    };

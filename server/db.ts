@@ -10,6 +10,7 @@ interface StoredUser {
   salt: string;
   hash: string;
   createdAt: number;
+  avatar?: string;
 }
 
 interface DatabaseSchema {
@@ -208,6 +209,7 @@ class Database {
         username: user.username,
         role: user.role,
         createdAt: user.createdAt,
+        avatar: user.avatar,
       };
     }
     return null;
@@ -221,6 +223,7 @@ class Database {
       username: user.username,
       role: user.role,
       createdAt: user.createdAt,
+      avatar: user.avatar,
     };
   }
 
@@ -233,6 +236,21 @@ class Database {
       username: user.username,
       role: user.role,
       createdAt: user.createdAt,
+      avatar: user.avatar,
+    };
+  }
+
+  public updateUserAvatar(userId: string, avatar: string): UserProfile | null {
+    const user = this.data.users.find((u) => u.id === userId);
+    if (!user) return null;
+    user.avatar = avatar;
+    this.save();
+    return {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+      createdAt: user.createdAt,
+      avatar: user.avatar,
     };
   }
 
@@ -299,12 +317,13 @@ class Database {
     return true;
   }
 
-  public getAllUsers(): { id: string; username: string; role: UserRole; createdAt: number }[] {
+  public getAllUsers(): { id: string; username: string; role: UserRole; createdAt: number; avatar?: string }[] {
     return this.data.users.map((u) => ({
       id: u.id,
       username: u.username,
       role: u.role,
       createdAt: u.createdAt,
+      avatar: u.avatar,
     }));
   }
 
@@ -319,6 +338,7 @@ class Database {
       roomId: 'global',
       senderId: sender.id,
       senderUsername: sender.username,
+      senderAvatar: sender.avatar,
       content: content.trim(),
       timestamp: Date.now(),
     };
